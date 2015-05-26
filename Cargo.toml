@@ -1,0 +1,4 @@
+[package]
+name = "math-ce2"
+version = "0.1.0"
+authors = ["blabaere <benoit.labaere@gmail.com>"]
