@@ -1,6 +1,12 @@
 use std::ops::{Add, Sub, Mul, Div};
-
-fn evaluate<T : Add<Output = T> + Sub<Output = T> + Mul<Output = T> + Div<Output = T> + Copy>(values: &[T;9], constants: &[T;4]) -> T {
+// : Add<Output = T> + Sub<Output = T> + Mul<Output = T> + Div<Output = T> + Copy
+fn evaluate<T>(values: &[T;9], constants: &[T;4]) -> T where
+	T : Add<Output = T>,
+	T : Sub<Output = T>,
+	T : Mul<Output = T>,
+	T : Div<Output = T>,
+	T : Copy
+{
 	values[0] + 
 	((constants[0] * values[1]) / values[2]) + 
 	values[3] + 
