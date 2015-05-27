@@ -72,6 +72,7 @@ fn permute_and_check_slice<T, P>(values: &mut [T;9], from: usize, to: usize, pre
 	}
 }
 
+// see https://github.com/rust-lang/rust/issues/21460
 fn permute_and_check<T, P>(values: &mut [T;9], predicate: &P) -> usize where 
 	T : Copy,
 	P : Fn(&[T;9]) -> bool {
@@ -106,19 +107,14 @@ fn find_float_solutions() -> usize {
 fn without_closure() {
 	let mut float_values = [1f64, 2f64, 3f64, 4f64, 5f64, 6f64, 7f64, 8f64, 9f64];
 	let mut int_values = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-	let mut result_count = permutation(&mut float_values, &FLOAT_CONSTANTS, 0, 9, 66f64);
 
-	println!("Float result count: {:?}", result_count);
-	result_count = permutation(&mut int_values, &INT_CONSTANTS, 0, 9, 66);
-	println!("Int result count: {:?}", result_count);
+	println!("Float result count: {:?}", permutation(&mut float_values, &FLOAT_CONSTANTS, 0, 9, 66f64));
+	println!("Int result count: {:?}", permutation(&mut int_values, &INT_CONSTANTS, 0, 9, 66));
 }
 
 fn with_closure() {
-	let mut result_count = find_float_solutions();
-
-	println!("Float result count: {:?}", result_count);
-	result_count = find_int_solutions();
-	println!("Int result count: {:?}", result_count);
+	println!("Float result count: {:?}", find_float_solutions());
+	println!("Int result count: {:?}", find_int_solutions());
 }
 
 fn main() {
