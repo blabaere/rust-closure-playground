@@ -121,3 +121,40 @@ fn main() {
 	without_closure();
 	with_closure();
 }
+
+#[cfg(test)]
+mod tests {
+
+    struct Delegate {
+        func: fn(u8) -> u8
+    }
+
+    impl Delegate {
+        fn call(&self, value: u8) -> u8 {
+            (self.func)(value)
+        }
+    }
+
+    #[test]
+    fn create_delegate_with_func_pointer() {
+        let callback = Delegate { func: transmogrify };
+        let x = 1;
+        let y = callback.call(x);
+
+        assert_eq!(2, y);
+    }
+
+    // Of course, it does not work, and cannot do
+    /*#[test]
+    fn create_delegate_with_closure() {
+        let callback = Delegate { func: |x| x+5};
+        let x = 1;
+        let y = callback.call(x);
+
+        assert_eq!(6, y);
+    }*/
+
+    fn transmogrify(value: u8) -> u8 {
+        value << 1
+    }
+}
